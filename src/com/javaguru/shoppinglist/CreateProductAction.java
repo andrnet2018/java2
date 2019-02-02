@@ -20,10 +20,19 @@ public class CreateProductAction implements Action {
         String name = scanner.nextLine();
         System.out.println("Enter product price: ");
         String price = scanner.nextLine();
+        System.out.println("Enter product category: ");
+        String category = scanner.nextLine();
+        System.out.println("Enter product discount: ");
+        String discount = scanner.nextLine();
+        System.out.println("Enter product description: ");
+        String description = scanner.nextLine();
 
         Product product = new Product();
         product.setName(name);
         product.setPrice(new BigDecimal(price));
+        product.setCategory(category);
+        product.setDiscount(new BigDecimal(discount));
+        product.setDescription(description);
 
         try {
             Long response = productService.create(product);

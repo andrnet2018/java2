@@ -8,6 +8,9 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
+    private String category;
+    private BigDecimal discount;
+    private String description;
 
     public Long getId() {
         return id;
@@ -22,7 +25,11 @@ public class Product {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if ((name.length() >= 3) && (name.length() < 33))
+            this.name = name;
+        else {
+            throw new IllegalArgumentException("Name is not valid!");
+        }
     }
 
     public BigDecimal getPrice() {
@@ -30,8 +37,41 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        if(price.compareTo(BigDecimal.ZERO) == 1)
+            this.price = price;
+        else {
+            throw new IllegalArgumentException("Price is not valid!");
+        }
     }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        if(discount.compareTo(BigDecimal.valueOf(101)) == -1)
+            this.discount = discount;
+        else {
+            throw new IllegalArgumentException("Discount is not valid!");
+        }
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
 
 
     @Override
@@ -41,12 +81,15 @@ public class Product {
         Product product = (Product) o;
         return Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name) &&
-                Objects.equals(price, product.price);
+                Objects.equals(price, product.price) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(discount, product.discount) &&
+                Objects.equals(description, product.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hash(id, name, price, category, discount, description);
     }
 
     @Override
@@ -54,7 +97,10 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price=" + price +
+                ", price=" + price + ", category='" +
+                category + '\'' +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
