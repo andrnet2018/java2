@@ -37,7 +37,7 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        if(price.compareTo(BigDecimal.ZERO) == 1)
+        if (price.compareTo(BigDecimal.ZERO) > 0)
             this.price = price;
         else {
             throw new IllegalArgumentException("Price is not valid!");
@@ -53,7 +53,7 @@ public class Product {
     }
 
     public void setDiscount(BigDecimal discount) {
-        if(discount.compareTo(BigDecimal.valueOf(101)) == -1)
+        if (discount.compareTo(BigDecimal.valueOf(101)) < 0)
             this.discount = discount;
         else {
             throw new IllegalArgumentException("Discount is not valid!");
@@ -71,7 +71,6 @@ public class Product {
     public String getDescription() {
         return description;
     }
-
 
 
     @Override
