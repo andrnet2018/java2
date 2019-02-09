@@ -44,7 +44,11 @@ public class Product {
     }
 
     public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
+        if (price.doubleValue() < 20) {
+            this.discount = BigDecimal.valueOf(0);
+        } else {
+            this.discount = discount;
+        }
     }
 
     public BigDecimal getDiscount() {
