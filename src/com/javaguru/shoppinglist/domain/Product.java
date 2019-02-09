@@ -1,10 +1,9 @@
-package com.javaguru.shoppinglist;
+package com.javaguru.shoppinglist.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product {
-
     private Long id;
     private String name;
     private BigDecimal price;
@@ -25,11 +24,7 @@ public class Product {
     }
 
     public void setName(String name) {
-        if ((name.length() >= 3) && (name.length() < 33))
-            this.name = name;
-        else {
-            throw new IllegalArgumentException("Name is not valid!");
-        }
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
@@ -37,11 +32,7 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        if (price.compareTo(BigDecimal.ZERO) > 0)
-            this.price = price;
-        else {
-            throw new IllegalArgumentException("Price is not valid!");
-        }
+        this.price = price;
     }
 
     public void setCategory(String category) {
@@ -53,11 +44,7 @@ public class Product {
     }
 
     public void setDiscount(BigDecimal discount) {
-        if (discount.compareTo(BigDecimal.valueOf(101)) < 0)
-            this.discount = discount;
-        else {
-            throw new IllegalArgumentException("Discount is not valid!");
-        }
+        this.discount = discount;
     }
 
     public BigDecimal getDiscount() {
