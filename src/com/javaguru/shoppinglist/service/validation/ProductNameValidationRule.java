@@ -1,7 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+        import com.javaguru.shoppinglist.domain.Product;
 
 public class ProductNameValidationRule implements ProductValidationRule {
 
