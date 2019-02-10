@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product {
-    public static final int MIN_PRICE_SIZE_FOR_DISCOUNT = 20;
+    public static final int MIN_PRICE_FOR_DISCOUNT = 20;
 
     private Long id;
     private String name;
@@ -46,7 +46,7 @@ public class Product {
     }
 
     public void setDiscount(BigDecimal discount) {
-        if (price.intValue() < MIN_PRICE_SIZE_FOR_DISCOUNT) {
+        if (price.intValue() < MIN_PRICE_FOR_DISCOUNT) {
             this.discount = BigDecimal.valueOf(0);
         } else {
             this.discount = discount;
