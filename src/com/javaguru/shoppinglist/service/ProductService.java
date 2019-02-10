@@ -10,6 +10,9 @@ public class ProductService {
     private ProductValidationService validationService = new ProductValidationService();
 
     public Long createProduct(Product product) {
+        if (repository.isUniqueName(product)) {
+            product = null;
+        }
         validationService.validate(product);
         Product createdProduct = repository.insert(product);
         return createdProduct.getId();

@@ -11,17 +11,17 @@ public class ProductInMemoryRepository {
     private Map<Long, Product> products = new HashMap<>();
 
     public Product insert(Product product) {
-        if (products.containsValue(product.getName())) {
-            return null;
-        } else {
-            product.setId(productIdSequence);
-            products.put(productIdSequence, product);
-            productIdSequence++;
-            return product;
-        }
+        product.setId(productIdSequence);
+        products.put(productIdSequence, product);
+        productIdSequence++;
+        return product;
     }
 
     public Product findProductById(Long id) {
         return products.get(id);
+    }
+
+    public boolean isUniqueName(Product product) {
+        return products.containsValue(product);
     }
 }

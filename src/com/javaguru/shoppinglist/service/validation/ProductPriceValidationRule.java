@@ -7,8 +7,12 @@ public class ProductPriceValidationRule implements ProductValidationRule {
     @Override
     public void validate(Product product) {
         checkNotNull(product);
-        if (product.getPrice().doubleValue() < 0) {
-            throw new ProductValidationException("Product price must be not less than 0.");
+        checkIfPriceMoreThanZero(product);
+    }
+
+    void checkIfPriceMoreThanZero(Product product) {
+        if (product.getPrice().doubleValue() <= 0) {
+            throw new ProductValidationException("Product price must be more than 0.");
         }
     }
 }
