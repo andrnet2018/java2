@@ -21,7 +21,7 @@ public class ProductInMemoryRepository {
         return products.get(id);
     }
 
-    public boolean isUniqueName(Product product) {
+    public boolean isNotUniqueName(Product product) {
         return products.containsValue(product);
     }
 }

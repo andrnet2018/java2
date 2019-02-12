@@ -10,7 +10,7 @@ public class ProductService {
     private ProductValidationService validationService = new ProductValidationService();
 
     public Long createProduct(Product product) {
-        if (repository.isUniqueName(product)) {
+        if (repository.isNotUniqueName(product)) {
             product = null;
         }
         validationService.validate(product);
