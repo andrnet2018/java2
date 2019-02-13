@@ -7,17 +7,21 @@ import java.util.Map;
 
 public class ProductInMemoryRepository {
 
-    private Long PRODUCT_ID_SEQUENCE = 0L;
+    private Long productIdSequence = 0L;
     private Map<Long, Product> products = new HashMap<>();
 
     public Product insert(Product product) {
-        product.setId(PRODUCT_ID_SEQUENCE);
-        products.put(PRODUCT_ID_SEQUENCE, product);
-        PRODUCT_ID_SEQUENCE++;
+        product.setId(productIdSequence);
+        products.put(productIdSequence, product);
+        productIdSequence++;
         return product;
     }
 
     public Product findProductById(Long id) {
         return products.get(id);
+    }
+
+    public boolean isNotUniqueName(Product product) {
+        return products.containsValue(product);
     }
 }
