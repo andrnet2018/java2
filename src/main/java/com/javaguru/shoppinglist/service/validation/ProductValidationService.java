@@ -17,6 +17,10 @@ public class ProductValidationService {
 
     }
 
+    public void setValidationRules(Set<ProductValidationRule> validationRules) {
+        this.validationRules = validationRules;
+    }
+
     public void validate(Product product) {
         validationRules.forEach(s -> s.validate(product));
     }
