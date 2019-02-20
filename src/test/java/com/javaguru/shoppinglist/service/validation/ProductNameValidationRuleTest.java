@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class ProductNameValidationRuleTest {
     public static final String TOO_SHORT_PRODUCT_NAME = "XX";
-    public static final String VALIDATED_PRODUCT_NAME = "It's goog name";
+    public static final String VALIDATED_PRODUCT_NAME = "It's good name";
     public static final String TOO_LONG_PRODUCT_NAME = "Too long name 1hFY5Acy23iCwFBd4RgSwQpZhuvBwmu3RXHu";
 
     @Rule
