@@ -47,10 +47,10 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void shouldFindProductbyId() {
+    public void shouldFindProductById() {
         when(repository.findProductById(2345L)).thenReturn(product());
 
-        Product result = victim.findProductbyId(2345L);
+        Product result = victim.findProductById(2345L);
 
         assertEquals(product(), result);
     }

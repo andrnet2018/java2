@@ -10,6 +10,9 @@ import org.mockito.internal.util.StringUtil;
 import static org.junit.Assert.*;
 
 public class ProductNameValidationRuleTest {
+    public static final String TOO_SHORT_PRODUCT_NAME = "XX";
+    public static final String VALIDATED_PRODUCT_NAME = "It's goog name";
+    public static final String TOO_LONG_PRODUCT_NAME = "Too long name 1hFY5Acy23iCwFBd4RgSwQpZhuvBwmu3RXHu";
 
     @Rule
     public final ExpectedException expectedException = ExpectedException.none();
@@ -20,7 +23,6 @@ public class ProductNameValidationRuleTest {
 
     @Test
     public void shouldThrowProductValidationException() {
-
         expectedException.expect(ProductValidationException.class);
         expectedException.expectMessage("Product must be not null");
         victim.validate(null);
@@ -37,14 +39,14 @@ public class ProductNameValidationRuleTest {
 
     @Test
     public void shouldNameValidateSuccess() {
-        input = product("Some test name");
+        input = product(VALIDATED_PRODUCT_NAME);
 
         victim.validate(input);
     }
 
     @Test
     public void shouldThrowProductNameMinLengthValidationException() {
-        input = product("X"); // Too short product name
+        input = product(TOO_SHORT_PRODUCT_NAME);
 
         expectedException.expect(ProductValidationException.class);
         expectedException.expectMessage("Product name length incorrect.");
@@ -53,7 +55,7 @@ public class ProductNameValidationRuleTest {
 
     @Test
     public void shouldThrowProductNameMaxLengthValidationException() {
-        input = product("e7RF1hFY5Acy23iCwFBd4RgSwQpZhuvBwmu3RXHu"); // length 40
+        input = product(TOO_LONG_PRODUCT_NAME);
 
         expectedException.expect(ProductValidationException.class);
         expectedException.expectMessage("Product name length incorrect.");
