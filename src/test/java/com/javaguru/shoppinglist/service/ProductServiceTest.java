@@ -12,8 +12,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -42,30 +44,36 @@ public class ProductServiceTest {
         verify(validationService).validate(productCaptor.capture());
         Product captorResult = productCaptor.getValue();
 
-        assertEquals(captorResult, product);
-        assertEquals(product.getId(), result);
+        assertThat(captorResult).isEqualTo(product);
+        assertThat(product.getId()).isEqualTo(result);
     }
 
     @Test
     public void shouldFindProductById() {
-        when(repository.findProductById(2345L)).thenReturn(product());
+        when(repository.findProductById(666L)).thenReturn(Optional.ofNullable(product()));
 
-        Product result = victim.findProductById(2345L);
+        Product result = victim.findProductById(666L);
 
-        assertEquals(product(), result);
+        assertThat(product()).isEqualTo(result);
+    }
+
+    @Test
+    public void shouldThrowExceptionProductNotFound() {
+        when(repository.findProductById(666L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> victim.findProductById(666L))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Product not found, id: 666");
     }
 
     private Product product() {
         Product product = new Product();
-        product.setId(2345L);
-        product.setName("Rye bread");
-        product.setCategory("Bakery product");
-        product.setPrice(new BigDecimal(3.4));
-        product.setDiscount(new BigDecimal(0));
-        product.setDescription("Rye bread is extremely popular in Latvia and" +
-                " there are plenty of different types, including dark or sweet" +
-                " sourdough rye bread. ");
+        product.setName("TEST_NAME");
+        product.setCategory("TEST_CATEGORY");
+        product.setPrice(new BigDecimal(2345));
+        product.setDiscount(new BigDecimal(30));
+        product.setDescription("TEST_DESCRIPTION");
+        product.setId(666L);
         return product;
     }
-
 }
