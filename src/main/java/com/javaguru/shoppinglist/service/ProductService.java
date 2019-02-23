@@ -6,19 +6,22 @@ import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 
 public class ProductService {
 
-    private ProductInMemoryRepository repository = new ProductInMemoryRepository();
-    private ProductValidationService validationService = new ProductValidationService();
+    private final ProductInMemoryRepository repository;
+    private final ProductValidationService validationService;
+
+    public ProductService(ProductInMemoryRepository repository, ProductValidationService validationService) {
+        this.repository = repository;
+        this.validationService = validationService;
+    }
 
     public Long createProduct(Product product) {
-        if (repository.isNotUniqueName(product)) {
-            product = null;
-        }
         validationService.validate(product);
         Product createdProduct = repository.insert(product);
         return createdProduct.getId();
     }
 
     public Product findProductById(Long id) {
-        return repository.findProductById(id);
+        return repository.findProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found, id: " + id));
     }
 }
