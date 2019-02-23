@@ -13,9 +13,9 @@ class ShoppingListApplication {
     public static void main(String[] args) {
         ProductInMemoryRepository repository = new ProductInMemoryRepository();
 
-        ProductValidationRule productDiscountValidationRule = new ProductNameValidationRule();
+        ProductValidationRule productDiscountValidationRule = new ProductDiscountValidationRule();
         ProductValidationRule productNameValidationRule = new ProductNameValidationRule();
-        ProductValidationRule productPriceValidationRule = new ProductNameValidationRule();
+        ProductValidationRule productPriceValidationRule = new ProductPriceValidationRule();
         ProductValidationRule productUniqueNameValidationRule = new ProductUniqueNameValidationRule(repository);
 
         Set<ProductValidationRule> rules = new HashSet<>();
