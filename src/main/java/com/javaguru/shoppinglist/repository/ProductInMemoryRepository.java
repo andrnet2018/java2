@@ -29,7 +29,8 @@ public class ProductInMemoryRepository {
     }
 
     public boolean existsByName(String name) {
-        return products.values().stream().anyMatch(product -> product.getName().equalsIgnoreCase(name));
+        return products.values().stream()
+                .anyMatch(product -> product.getName().equalsIgnoreCase(name));
     }
 
     public Optional<Product> findProductByName(String name) {

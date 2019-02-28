@@ -8,7 +8,7 @@ public class ProductDiscountValidationRule implements ProductValidationRule {
 
     public static final int MIN_DISCOUNT_SIZE = 0;
     public static final int MAX_DISCOUNT_SIZE = 100;
-    public static final int MIN_PRICE_FOR_DISCOUNT_SIZE = 100;
+    public static final int MIN_PRICE_FOR_DISCOUNT_SIZE = 20;
 
     @Override
     public void validate(Product product) {
@@ -31,7 +31,7 @@ public class ProductDiscountValidationRule implements ProductValidationRule {
     }
 
     void checkMoreThanMinPriceForDiscount(Product product) {
-        if (product.getPrice().doubleValue() < 20 && product.getDiscount().doubleValue() > 0) {
+        if (product.getPrice().doubleValue() < MIN_PRICE_FOR_DISCOUNT_SIZE && product.getDiscount().doubleValue() > MIN_DISCOUNT_SIZE) {
             throw new ProductValidationException("Product discount must be 0% for this product price.");
         }
     }
