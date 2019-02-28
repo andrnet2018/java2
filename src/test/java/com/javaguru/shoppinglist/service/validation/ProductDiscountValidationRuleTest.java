@@ -38,17 +38,19 @@ public class ProductDiscountValidationRuleTest {
     }
 
     @Test
+    public void shouldThrowProductIfPriceIsLessTwentyDiscountValidationException() {
+        input = product(new BigDecimal(19), new BigDecimal(55));
+
+        assertThatThrownBy(() -> victim.validate(input))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product discount must be 0% for this product price.");
+    }
+
+    @Test
     public void shouldDiscountValidateSuccess() {
         input = product(new BigDecimal(20), new BigDecimal(55));
 
         victim.validate(input);
-    }
-
-    @Test
-    public void shouldDiscountToZeroIfPriceLessThanTwentyValidateSuccess() {
-        input = product(new BigDecimal(19), new BigDecimal(55));
-
-        assertThat(input.getDiscount()).isEqualTo(new BigDecimal(0));
     }
 
     private Product product(BigDecimal price, BigDecimal discount) {

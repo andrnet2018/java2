@@ -2,14 +2,19 @@ package com.javaguru.shoppinglist.console;
 
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.service.ProductService;
+import com.javaguru.shoppinglist.service.validation.ProductValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@Component
 public class ConsoleUI {
 
     private final ProductService productService;
 
+    @Autowired
     public ConsoleUI(ProductService productService) {
         this.productService = productService;
     }
@@ -32,6 +37,8 @@ public class ConsoleUI {
                     case 3:
                         return;
                 }
+            } catch (ProductValidationException e) {
+                System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("Error! Please try again.");
             }
