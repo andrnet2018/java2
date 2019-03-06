@@ -46,11 +46,7 @@ public class Product {
     }
 
     public void setDiscount(BigDecimal discount) {
-        if (price.intValue() < MIN_PRICE_FOR_DISCOUNT) {
-            this.discount = BigDecimal.valueOf(0);
-        } else {
-            this.discount = discount;
-        }
+        this.discount = discount;
     }
 
     public BigDecimal getDiscount() {
@@ -65,18 +61,17 @@ public class Product {
         return description;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(price, product.price) &&
-                Objects.equals(category, product.category) &&
-                Objects.equals(discount, product.discount) &&
-                Objects.equals(description, product.description);
+        return Objects.equals(id, product.id)
+                && Objects.equals(name, product.name)
+                && Objects.equals(price, product.price)
+                && Objects.equals(category, product.category)
+                && Objects.equals(discount, product.discount)
+                && Objects.equals(description, product.description);
     }
 
     @Override
@@ -86,13 +81,22 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price + ", category='" +
-                category + '\'' +
-                ", discount=" + discount +
-                ", description='" + description + '\'' +
-                '}';
+        return "Product{"
+                + "id="
+                + id
+                + ", name='"
+                + name
+                + '\''
+                + ", price="
+                + price
+                + ", category='"
+                + category
+                + '\''
+                + ", discount="
+                + discount
+                + ", description='"
+                + description
+                + '\''
+                + '}';
     }
 }

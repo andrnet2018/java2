@@ -29,8 +29,7 @@ public class ProductUniqueNameValidationRuleTest {
 
     @Test
     public void shouldThrowException() {
-        when(productInMemoryRepository.existsByName(product.getName()))
-                .thenReturn(true);
+        when(productInMemoryRepository.existsByName(product.getName())).thenReturn(true);
 
         assertThatThrownBy(() -> victim.validate(product))
                 .isInstanceOf(ProductValidationException.class)
@@ -41,8 +40,7 @@ public class ProductUniqueNameValidationRuleTest {
 
     @Test
     public void shouldValidateSuccess() {
-        when(productInMemoryRepository.existsByName(product.getName()))
-                .thenReturn(false);
+        when(productInMemoryRepository.existsByName(product.getName())).thenReturn(false);
 
         victim.validate(product);
 
