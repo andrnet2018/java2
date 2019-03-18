@@ -15,10 +15,6 @@ public class ProductInMemoryRepository implements ProductRepository {
     private Long productIdSequence = 0L;
     private Map<Long, Product> products = new HashMap<>();
 
-    public Map<Long, Product> getProducts() {
-        return products;
-    }
-
     public Long insert(Product product) {
         product.setId(productIdSequence++);
         products.put(product.getId(), product);
