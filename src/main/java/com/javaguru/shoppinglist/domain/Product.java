@@ -1,16 +1,26 @@
 package com.javaguru.shoppinglist.domain;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Product {
-    public static final int MIN_PRICE_FOR_DISCOUNT = 20;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "category")
     private String category;
+    @Column(name = "discount")
     private BigDecimal discount;
+    @Column(name = "description")
     private String description;
 
     public Long getId() {

@@ -10,7 +10,7 @@ class ShoppingListApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        ConsoleUI consoleUI = context.getBean(ConsoleUI.class);
-        consoleUI.execute();
+        ConsoleUI console = context.getBean(ConsoleUI.class);
+        console.start();
     }
 }
