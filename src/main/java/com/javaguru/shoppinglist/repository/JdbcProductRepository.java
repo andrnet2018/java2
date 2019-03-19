@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Repository
 @Profile("jdbc")
-public class JdbcProductRepository implements ProductRepository{
+public class JdbcProductRepository implements ProductRepository {
 
     private final JdbcTemplate jdbcTemplate;
 

@@ -46,6 +46,7 @@ public class CreateProductAction implements Action {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("Error! Please try again.");
+            e.printStackTrace();
         }
     }
 
