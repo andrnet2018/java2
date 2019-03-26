@@ -33,7 +33,7 @@ public class ProductUniqueNameValidationRuleTest {
 
         assertThatThrownBy(() -> victim.validate(product))
                 .isInstanceOf(ProductValidationException.class)
-                .hasMessage("Task name must be unique.");
+                .hasMessage("Product name must be unique.");
 
         verify(victim).checkNotNull(product);
     }

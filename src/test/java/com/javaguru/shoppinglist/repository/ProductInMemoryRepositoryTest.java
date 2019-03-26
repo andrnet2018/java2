@@ -1,6 +1,7 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -24,10 +25,9 @@ public class ProductInMemoryRepositoryTest {
 
     @Test
     public void shouldInsert() {
-        victim.insert(product);
-        Product result = victim.getProducts().get(PRODUCT_ID);
+        Long result = victim.insert(product);
 
-        assertThat(result).isEqualTo(expectedProduct());
+        assertThat(result).isEqualTo(expectedProduct().getId());
     }
 
     @Test

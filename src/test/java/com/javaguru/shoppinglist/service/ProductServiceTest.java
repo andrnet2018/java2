@@ -3,6 +3,7 @@ package com.javaguru.shoppinglist.service;
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -28,16 +29,20 @@ public class ProductServiceTest {
     @Mock
     private ProductValidationService validationService;
 
-    @InjectMocks
-    private ProductService victim;
-
     @Captor
     private ArgumentCaptor<Product> productCaptor;
+
+    private ProductService victim;
+
+    @Before
+    public void setUp() throws Exception {
+        victim = new DefaultProductService(repository, validationService);
+    }
 
     @Test
     public void shouldCreateProductSuccessfully() {
         Product product = product();
-        when(repository.insert(product)).thenReturn(product);
+        when(repository.insert(product)).thenReturn(product.getId());
 
         Long result = victim.createProduct(product);
 
