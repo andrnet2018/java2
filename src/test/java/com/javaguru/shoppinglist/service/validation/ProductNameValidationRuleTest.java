@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
@@ -20,11 +20,11 @@ public class ProductNameValidationRuleTest {
     @Spy
     private ProductNameValidationRule victim;
 
-    private Product input;
+    private ProductDto input;
 
     @Test
     public void shouldThrowProductNameValidationException() {
-        input = product(null);
+        input = productDto(null);
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -34,7 +34,7 @@ public class ProductNameValidationRuleTest {
 
     @Test
     public void shouldNameLenghtValidateSuccess() {
-        input = product(VALIDATED_PRODUCT_NAME);
+        input = productDto(VALIDATED_PRODUCT_NAME);
 
         victim.validate(input);
         verify(victim).checkNotNull(input);
@@ -42,7 +42,7 @@ public class ProductNameValidationRuleTest {
 
     @Test
     public void shouldThrowProductNameMinLengthValidationException() {
-        input = product(TOO_SHORT_PRODUCT_NAME);
+        input = productDto(TOO_SHORT_PRODUCT_NAME);
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -52,7 +52,7 @@ public class ProductNameValidationRuleTest {
 
     @Test
     public void shouldThrowProductNameMaxLengthValidationException() {
-        input = product(TOO_LONG_PRODUCT_NAME);
+        input = productDto(TOO_LONG_PRODUCT_NAME);
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -60,9 +60,9 @@ public class ProductNameValidationRuleTest {
         verify(victim).checkNotNull(input);
     }
 
-    private Product product(String name) {
-        Product product = new Product();
-        product.setName(name);
-        return product;
+    private ProductDto productDto(String name) {
+        ProductDto productDto = new ProductDto();
+        productDto.setName(name);
+        return productDto;
     }
 }

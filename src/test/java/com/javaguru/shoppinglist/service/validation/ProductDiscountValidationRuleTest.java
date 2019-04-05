@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
@@ -17,11 +17,11 @@ public class ProductDiscountValidationRuleTest {
     @Spy
     private ProductDiscountValidationRule victim;
 
-    private Product input;
+    private ProductDto input;
 
     @Test
     public void shouldThrowProductMaxDiscountValidationException() {
-        input = product(new BigDecimal(20), new BigDecimal(101));
+        input = productDto(new BigDecimal(20), new BigDecimal(101));
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -30,7 +30,7 @@ public class ProductDiscountValidationRuleTest {
 
     @Test
     public void shouldThrowProductMinDiscountValidationException() {
-        input = product(new BigDecimal(20), new BigDecimal(-10));
+        input = productDto(new BigDecimal(20), new BigDecimal(-10));
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -39,7 +39,7 @@ public class ProductDiscountValidationRuleTest {
 
     @Test
     public void shouldThrowProductIfPriceIsLessTwentyDiscountValidationException() {
-        input = product(new BigDecimal(19), new BigDecimal(55));
+        input = productDto(new BigDecimal(19), new BigDecimal(55));
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -48,15 +48,15 @@ public class ProductDiscountValidationRuleTest {
 
     @Test
     public void shouldDiscountValidateSuccess() {
-        input = product(new BigDecimal(20), new BigDecimal(55));
+        input = productDto(new BigDecimal(20), new BigDecimal(55));
 
         victim.validate(input);
     }
 
-    private Product product(BigDecimal price, BigDecimal discount) {
-        Product product = new Product();
-        product.setPrice(price);
-        product.setDiscount(discount);
-        return product;
+    private ProductDto productDto(BigDecimal price, BigDecimal discount) {
+        ProductDto productDto = new ProductDto();
+        productDto.setPrice(price);
+        productDto.setDiscount(discount);
+        return productDto;
     }
 }

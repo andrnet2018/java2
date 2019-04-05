@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,11 +33,11 @@ public class ProductValidationServiceTest {
     private ProductPriceValidationRule productPriceValidationRule;
 
     @Captor
-    private ArgumentCaptor<Product> captor;
+    private ArgumentCaptor<ProductDto> captor;
 
     private ProductValidationService victim;
 
-    private Product product = product();
+    private ProductDto productDto = productDto();
 
     @Before
     public void setUp() {
@@ -52,25 +52,25 @@ public class ProductValidationServiceTest {
 
     @Test
     public void shouldValidate() {
-        victim.validate(product);
+        victim.validate(productDto);
 
         verify(uniqueNameValidationRule).validate(captor.capture());
         verify(productNameValidationRule).validate(captor.capture());
         verify(productDiscountValidationRule).validate(captor.capture());
         verify(productPriceValidationRule).validate(captor.capture());
 
-        List<Product> resultList = captor.getAllValues();
-        assertThat(resultList).containsOnly(product);
+        List<ProductDto> resultList = captor.getAllValues();
+        assertThat(resultList).containsOnly(productDto);
     }
 
-    private Product product() {
-        Product product = new Product();
-        product.setId(666L);
-        product.setName("TEST_NAME");
-        product.setCategory("TEST_CATEGORY");
-        product.setPrice(new BigDecimal(666));
-        product.setDiscount(new BigDecimal(99));
-        product.setDescription("TEST_DESCRIPTION");
-        return product;
+    private ProductDto productDto() {
+        ProductDto productDto = new ProductDto();
+        productDto.setId(666L);
+        productDto.setName("TEST_NAME");
+        productDto.setCategory("TEST_CATEGORY");
+        productDto.setPrice(new BigDecimal(666));
+        productDto.setDiscount(new BigDecimal(99));
+        productDto.setDescription("TEST_DESCRIPTION");
+        return productDto;
     }
 }
