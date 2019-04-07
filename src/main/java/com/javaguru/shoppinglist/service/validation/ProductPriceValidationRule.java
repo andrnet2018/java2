@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductPriceValidationRule implements ProductValidationRule {
 
-    public static final int MIN_PRICE = 0;
+    private static final int MIN_PRICE = 0;
 
     @Override
     public void validate(ProductDto productDto) {
@@ -15,7 +15,7 @@ public class ProductPriceValidationRule implements ProductValidationRule {
         checkIfPriceMoreThanZero(productDto);
     }
 
-    void checkIfPriceMoreThanZero(ProductDto productDto) {
+    private void checkIfPriceMoreThanZero(ProductDto productDto) {
         if (productDto.getPrice().doubleValue() <= MIN_PRICE) {
             throw new ProductValidationException("Product price must be more than 0.");
         }
