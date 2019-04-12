@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
@@ -24,8 +24,8 @@ public class ProductValidationRuleTest {
 
     @Test
     public void shouldCheckNotNull() {
-        Product product = new Product();
+        ProductDto productDto = new ProductDto();
 
-        victim.checkNotNull(product);
+        victim.checkNotNull(productDto);
     }
 }

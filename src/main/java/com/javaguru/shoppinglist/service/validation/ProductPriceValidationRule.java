@@ -1,21 +1,22 @@
 package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductPriceValidationRule implements ProductValidationRule {
 
-    public static final int MIN_PRICE = 0;
+    private static final int MIN_PRICE = 0;
 
     @Override
-    public void validate(Product product) {
-        checkNotNull(product);
-        checkIfPriceMoreThanZero(product);
+    public void validate(ProductDto productDto) {
+        checkNotNull(productDto);
+        checkIfPriceMoreThanZero(productDto);
     }
 
-    void checkIfPriceMoreThanZero(Product product) {
-        if (product.getPrice().doubleValue() <= MIN_PRICE) {
+    private void checkIfPriceMoreThanZero(ProductDto productDto) {
+        if (productDto.getPrice().doubleValue() <= MIN_PRICE) {
             throw new ProductValidationException("Product price must be more than 0.");
         }
     }

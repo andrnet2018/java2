@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
@@ -17,11 +17,11 @@ public class ProductPriceValidationRuleTest {
     @Spy
     private ProductPriceValidationRule victim;
 
-    private Product input;
+    private ProductDto input;
 
     @Test
     public void shouldThrowProductPriceValidationException() {
-        input = product(new BigDecimal(0));
+        input = productDto(new BigDecimal(0));
 
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(ProductValidationException.class)
@@ -31,14 +31,14 @@ public class ProductPriceValidationRuleTest {
 
     @Test
     public void shouldPriceValidateSuccess() {
-        input = product(new BigDecimal(50));
+        input = productDto(new BigDecimal(50));
         victim.validate(input);
         verify(victim).checkNotNull(input);
     }
 
-    private Product product(BigDecimal price) {
-        Product product = new Product();
-        product.setPrice(price);
-        return product;
+    private ProductDto productDto(BigDecimal price) {
+        ProductDto productDto = new ProductDto();
+        productDto.setPrice(price);
+        return productDto;
     }
 }

@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.Product;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+import com.javaguru.shoppinglist.dto.ProductDto;
+import com.javaguru.shoppinglist.repository.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,42 +19,42 @@ import static org.mockito.Mockito.when;
 public class ProductUniqueNameValidationRuleTest {
 
     @Mock
-    private ProductInMemoryRepository productInMemoryRepository;
+    private ProductRepository hibernateProductRepository;
 
     @Spy
     @InjectMocks
     private ProductUniqueNameValidationRule victim;
 
-    private Product product = product();
+    private ProductDto productDto = productDto();
 
     @Test
     public void shouldThrowException() {
-        when(productInMemoryRepository.existsByName(product.getName())).thenReturn(true);
+        when(hibernateProductRepository.existsByName(productDto.getName())).thenReturn(true);
 
-        assertThatThrownBy(() -> victim.validate(product))
+        assertThatThrownBy(() -> victim.validate(productDto))
                 .isInstanceOf(ProductValidationException.class)
                 .hasMessage("Product name must be unique.");
 
-        verify(victim).checkNotNull(product);
+        verify(victim).checkNotNull(productDto);
     }
 
     @Test
     public void shouldValidateSuccess() {
-        when(productInMemoryRepository.existsByName(product.getName())).thenReturn(false);
+        when(hibernateProductRepository.existsByName(productDto.getName())).thenReturn(false);
 
-        victim.validate(product);
+        victim.validate(productDto);
 
-        verify(victim).checkNotNull(product);
+        verify(victim).checkNotNull(productDto);
     }
 
-    private Product product() {
-        Product product = new Product();
-        product.setId(666L);
-        product.setName("TEST_NAME");
-        product.setCategory("TEST_CATEGORY");
-        product.setPrice(new BigDecimal(666));
-        product.setDiscount(new BigDecimal(99));
-        product.setDescription("TEST_DESCRIPTION");
-        return product;
+    private ProductDto productDto() {
+        ProductDto productDto = new ProductDto();
+        productDto.setId(666L);
+        productDto.setName("TEST_NAME");
+        productDto.setCategory("TEST_CATEGORY");
+        productDto.setPrice(new BigDecimal(666));
+        productDto.setDiscount(new BigDecimal(99));
+        productDto.setDescription("TEST_DESCRIPTION");
+        return productDto;
     }
 }
