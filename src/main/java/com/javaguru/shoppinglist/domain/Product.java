@@ -22,8 +22,7 @@ public class Product {
     private BigDecimal discount;
     @Column(name = "description")
     private String description;
-    //private BigDecimal discountedPrice;
-
+    
     public Long getId() {
         return id;
     }
